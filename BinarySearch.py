@@ -1,7 +1,11 @@
+# This program proves how much faster it is to perform a binary search rather than a normal search
+# A binary search works by constantly dividing the search list in half until you arrive to the final location
+
 import random
 import time
 
 
+# Defining the normal search 
 def naive_search(l, target):
     for i in range(len(l)):
         if l[i] == target:
@@ -9,6 +13,7 @@ def naive_search(l, target):
     return -1
 
 
+# Defining the binary search
 def binary_search(l, target, low=None, high=None):
     if low is None:
         low = 0
@@ -18,6 +23,7 @@ def binary_search(l, target, low=None, high=None):
     if high < low:
         return -1
 
+    # Finding the midpoint
     midpoint = (low + high) // 2
     if l[midpoint] == target:
         return midpoint
@@ -28,17 +34,15 @@ def binary_search(l, target, low=None, high=None):
 
 
 if __name__ == "__main__":
-    # l = [1, 3, 5, 10, 12]
-    # target = 10
-    # print(naive_search(l, target))
-    # print(binary_search(l, target))
 
+    # Defining a random list
     length = 10000
     sorted_list = set()
     while len(sorted_list) < length:
         sorted_list.add(random.randint(-3*length, 3*length))
     sorted_list = sorted(list(sorted_list))
 
+    # Timing the searches
     start = time.time()
     for target in sorted_list:
         naive_search(sorted_list, target)
